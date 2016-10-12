@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/ember-data-fetch-support.svg)](https://badge.fury.io/js/ember-data-fetch-support)
 [![Build Status](https://travis-ci.org/kellyselden/ember-data-fetch-support.svg?branch=master)](https://travis-ci.org/kellyselden/ember-data-fetch-support)
 
-Replaces `$.ajax` with `fetch` in `ember-data`. Functions as a mixin for `ember-data` adapters. Uses `ember-network` for FastBoot support.
+Replaces `$.ajax` with `fetch` in [`ember-data`](https://github.com/emberjs/data). Functions as a mixin for `ember-data` adapters. Uses [`ember-network`](https://github.com/tomdale/ember-network) for FastBoot support.
 
 ## Installation
 
