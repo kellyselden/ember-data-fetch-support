@@ -76,7 +76,9 @@ export default Mixin.create({
 
   ajax(url, type, options) {
     let qs = this._convertDataToQueryString(options.data);
-    url += `?${qs}`;
+    if (qs) {
+      url += `?${qs}`;
+    }
 
     let init = this._createInit(type, options.headers);
 
