@@ -4,6 +4,8 @@ const {
   $,
   Mixin,
   inject: { service },
+  computed,
+  getOwner,
   get, set
 } = Ember;
 
@@ -20,9 +22,12 @@ function isFastBoot() {
 }
 
 export default Mixin.create({
-  fastboot: service(),
   cookies: service(),
   fetch: service(),
+
+  fastboot: computed(function() {
+    return getOwner(this).lookup('service:fastboot');
+  }),
 
   _convertDataToQueryString(data) {
     let qs;
