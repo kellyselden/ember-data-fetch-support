@@ -50,6 +50,9 @@
     "ember-data": "^2.8.0"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "fastBootDependencies": [
+      "querystring"
+    ]
   }
 }
