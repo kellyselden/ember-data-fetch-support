@@ -22,7 +22,6 @@ function isFastBoot() {
 }
 
 export default Mixin.create({
-  cookies: service(),
   fetch: service(),
 
   fastboot: computed(function() {
