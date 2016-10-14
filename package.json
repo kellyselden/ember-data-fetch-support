@@ -40,6 +40,7 @@
     "ember-network": "0.3.0",
     "ember-resolver": "^2.0.3",
     "ember-sinon": "0.5.1",
+    "ember-try": "kellyselden/ember-try#master",
     "fetch-mock": "^5.0.0",
     "loader.js": "^4.0.1"
   },
@@ -50,8 +51,8 @@
     "ember-cli-babel": "^5.1.6"
   },
   "peerDependencies": {
-    "ember-data": "^2.8.0",
-    "ember-network": "0.3.0"
+    "ember-data": "",
+    "ember-network": ""
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
