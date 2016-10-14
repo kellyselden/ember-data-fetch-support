@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import 'ember-network/fetch';
+import fetch from 'ember-network/fetch';
 
 const {
   Service
