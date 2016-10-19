@@ -9,9 +9,9 @@ const {
 } = Ember;
 
 const url = 'test/url';
-const type = 'TEST_METHOD';
 const query = 'test=query';
 
+let type;
 let sandbox;
 let jsonResponse;
 let fetch;
@@ -52,6 +52,7 @@ module('Unit | Mixin | fetch support', {
     });
     subject = FetchSupportObject.create();
 
+    type = 'TEST_METHOD';
     data = {
       test: 'data'
     };
@@ -188,5 +189,21 @@ test('it sets cookie header when fastboot', function(assert) {
 test('it returns json from fetch', function(assert) {
   return ajax().then(result => {
     assert.strictEqual(result, jsonResponse);
+  });
+});
+
+test('it passes the data as body and not qs for PUT', function(assert) {
+  type = 'PUT';
+  return ajax().then(() => {
+    assert.strictEqual(fetch.args[0][1].body, data);
+    assert.strictEqual(fetch.args[0][0], url);
+  });
+});
+
+test('it passes the data as body and not qs for POST', function(assert) {
+  type = 'POST';
+  return ajax().then(() => {
+    assert.strictEqual(fetch.args[0][1].body, data);
+    assert.strictEqual(fetch.args[0][0], url);
   });
 });

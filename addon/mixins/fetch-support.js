@@ -57,13 +57,17 @@ export default Mixin.create({
     return cookie.join('; ');
   },
 
-  _createInit(type, headers) {
+  _createInit(type, headers, body) {
     headers = assign({}, get(this, 'headers'), headers);
 
     let init = {
       method: type,
       headers
     };
+
+    if (body) {
+      init.body = body;
+    }
 
     if (isFastBoot()) {
       headers.cookie = this._createCookieString();
@@ -75,12 +79,20 @@ export default Mixin.create({
   },
 
   ajax(url, type, options) {
-    let qs = this._convertDataToQueryString(options.data);
-    if (qs) {
-      url += `?${qs}`;
+    let body;
+    switch (type) {
+      case 'PUT':
+      case 'POST':
+        body = options.data;
+        break;
+      default:
+        let qs = this._convertDataToQueryString(options.data);
+        if (qs) {
+          url += `?${qs}`;
+        }
     }
 
-    let init = this._createInit(type, options.headers);
+    let init = this._createInit(type, options.headers, body);
 
     return get(this, 'fetch').fetch(url, init).then(response => {
       return response.json();
