@@ -61,7 +61,7 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "fastBootDependencies": [
+    "fastbootDependencies": [
       "querystring"
     ]
   }
