@@ -47,7 +47,8 @@
     "fetch-mock": "^5.0.0",
     "loader.js": "^4.0.1",
     "mocha": "^3.0.0",
-    "request": "^2.0.0"
+    "request": "^2.0.0",
+    "rsvp": "^3.0.0"
   },
   "keywords": [
     "ember-addon"
