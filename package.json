@@ -9,7 +9,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "cross-env BROWSERIFY_TESTS=true ember test && mocha"
+    "test": "cross-env BROWSERIFY_TESTS=true ember test"
   },
   "repository": "https://github.com/kellyselden/ember-data-fetch-support",
   "engines": {
