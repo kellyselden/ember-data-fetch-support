@@ -11,11 +11,11 @@ const {
 const url = 'test/url';
 const query = 'test=query';
 
-let type;
 let sandbox;
 let jsonResponse;
 let fetch;
 let subject;
+let type;
 let data;
 let options;
 let param;
@@ -192,18 +192,34 @@ test('it returns json from fetch', function(assert) {
   });
 });
 
-test('it passes the data as body and not qs for PUT', function(assert) {
+test('it passes the data as body for PUT', function(assert) {
   type = 'PUT';
-  return ajax().then(() => {
-    assert.strictEqual(fetch.args[0][1].body, data);
-    assert.strictEqual(fetch.args[0][0], url);
-  });
+
+  ajax();
+
+  assert.strictEqual(fetch.args[0][1].body, data);
 });
 
-test('it passes the data as body and not qs for POST', function(assert) {
+test('it doesn\'t pass the data as qs for PUT', function(assert) {
+  type = 'PUT';
+
+  ajax();
+
+  assert.strictEqual(fetch.args[0][0], url);
+});
+
+test('it passes the data as body for POST', function(assert) {
   type = 'POST';
-  return ajax().then(() => {
-    assert.strictEqual(fetch.args[0][1].body, data);
-    assert.strictEqual(fetch.args[0][0], url);
-  });
+
+  ajax();
+
+  assert.strictEqual(fetch.args[0][1].body, data);
+});
+
+test('it doesn\'t pass the data as qs for POST', function(assert) {
+  type = 'POST';
+
+  ajax();
+
+  assert.strictEqual(fetch.args[0][0], url);
 });
