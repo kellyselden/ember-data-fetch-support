@@ -21,6 +21,14 @@ function isFastBoot() {
   return typeof FastBoot !== 'undefined';
 }
 
+function parseHeaders(headers) {
+  let newHeaders = {};
+  headers.forEach((val, key) => {
+    newHeaders[key] = val;
+  });
+  return newHeaders;
+}
+
 export default Mixin.create({
   fetch: service(),
 
@@ -78,6 +86,26 @@ export default Mixin.create({
     return init;
   },
 
+  _handleResponse(url, type, response) {
+    return response.json().then(json => {
+      response = this.handleResponse(
+        response.status,
+        parseHeaders(response.headers),
+        json,
+        {
+          url,
+          method: type
+        }
+      );
+
+      if (response.isAdapterError) {
+        throw response;
+      }
+
+      return response;
+    });
+  },
+
   ajax(url, type, options) {
     let body;
     switch (type) {
@@ -95,7 +123,7 @@ export default Mixin.create({
     let init = this._createInit(type, options.headers, body);
 
     return get(this, 'fetch').fetch(url, init).then(response => {
-      return response.json();
+      return this._handleResponse(url, type, response);
     });
   }
 });

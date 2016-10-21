@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "ember build",
-    "start": "ember server",
+    "start": "cross-env BROWSERIFY_TESTS=true ember server",
     "test": "cross-env BROWSERIFY_TESTS=true ember test"
   },
   "repository": "https://github.com/kellyselden/ember-data-fetch-support",

@@ -5,19 +5,37 @@ import sinon from 'sinon';
 
 const {
   $,
-  RSVP: { resolve }
+  RSVP: { resolve },
+  copy
 } = Ember;
 
 const url = 'test/url';
 const query = 'test=query';
+const getQuery = `${url}?${query}`;
+const status = '12345';
 
 let sandbox;
-let jsonResponse;
+const jsonResponse = {
+  test: 'test json response'
+};
 let fetch;
+const handleResponseResponse = {
+  test: 'test handleResponse respose'
+};
+let handleResponseResponseCopy;
+let handleResponse;
 let subject;
 let type;
-let data;
-let options;
+const data = {
+  test: 'test data'
+};
+const options = {
+  data: copy(data, true),
+  headers: {
+    test: 'request'
+  }
+};
+let optionsCopy;
 let param;
 let require;
 let stringify;
@@ -26,12 +44,20 @@ module('Unit | Mixin | fetch support', {
   beforeEach() {
     sandbox = sinon.sandbox.create();
 
-    jsonResponse = {};
     fetch = sandbox.stub().returns(resolve({
+      status,
+      headers: {
+        forEach(func) {
+          func('test response header value', 'test response header');
+        }
+      },
       json() {
-        return jsonResponse;
+        return resolve(copy(jsonResponse, true));
       }
     }));
+
+    handleResponseResponseCopy = copy(handleResponseResponse, true);
+    handleResponse = sandbox.stub().returns(handleResponseResponseCopy);
 
     let FetchSupportObject = Ember.Object.extend(FetchSupportMixin, {
       fetch: {
@@ -48,20 +74,15 @@ module('Unit | Mixin | fetch support', {
             test2: 'another cookie'
           }
         }
-      }
+      },
+      handleResponse
     });
     subject = FetchSupportObject.create();
 
     type = 'TEST_METHOD';
-    data = {
-      test: 'data'
-    };
-    options = {
-      data,
-      headers: {
-        test: 'request'
-      }
-    };
+
+    optionsCopy = copy(options, true);
+
     param = sandbox.stub($, 'param');
     param.withArgs(data).returns(query);
   },
@@ -87,7 +108,7 @@ function turnOnFastBoot() {
 }
 
 function ajax() {
-  return subject.ajax(url, type, options);
+  return subject.ajax(url, type, optionsCopy);
 }
 
 test('it calls jquery param for query string when not fastboot', function(assert) {
@@ -130,7 +151,7 @@ test('it only calls fetch once', function(assert) {
 test('it appends data to url as query string when not fastboot', function(assert) {
   ajax();
 
-  assert.strictEqual(fetch.args[0][0], `${url}?${query}`);
+  assert.strictEqual(fetch.args[0][0], getQuery);
 });
 
 test('it appends data to url as query string when fastboot', function(assert) {
@@ -138,7 +159,7 @@ test('it appends data to url as query string when fastboot', function(assert) {
 
   ajax();
 
-  assert.strictEqual(fetch.args[0][0], `${url}?${query}`);
+  assert.strictEqual(fetch.args[0][0], getQuery);
 });
 
 test('it merges global and request headers', function(assert) {
@@ -153,14 +174,7 @@ test('it merges global and request headers', function(assert) {
 test('it doesn\'t modify passed in options', function(assert) {
   ajax();
 
-  assert.deepEqual(options, {
-    data: {
-      test: 'data'
-    },
-    headers: {
-      test: 'request'
-    }
-  });
+  assert.deepEqual(optionsCopy, options);
 });
 
 test('it handles method type', function(assert) {
@@ -175,6 +189,14 @@ test('it sets cookie credentials when not fastboot', function(assert) {
   assert.strictEqual(fetch.args[0][1].credentials, 'include');
 });
 
+test('it doesn\'t set cookie credentials when fastboot', function(assert) {
+  turnOnFastBoot();
+
+  ajax();
+
+  assert.notOk('credentials' in fetch.args[0][1]);
+});
+
 test('it sets cookie header when fastboot', function(assert) {
   turnOnFastBoot();
 
@@ -186,10 +208,10 @@ test('it sets cookie header when fastboot', function(assert) {
   );
 });
 
-test('it returns json from fetch', function(assert) {
-  return ajax().then(result => {
-    assert.strictEqual(result, jsonResponse);
-  });
+test('it doesn\'t set cookie header when not fastboot', function(assert) {
+  ajax();
+
+  assert.notOk('cookie' in fetch.args[0][1].headers);
 });
 
 test('it passes the data as body for PUT', function(assert) {
@@ -197,7 +219,7 @@ test('it passes the data as body for PUT', function(assert) {
 
   ajax();
 
-  assert.strictEqual(fetch.args[0][1].body, data);
+  assert.deepEqual(fetch.args[0][1].body, data);
 });
 
 test('it doesn\'t pass the data as qs for PUT', function(assert) {
@@ -213,7 +235,7 @@ test('it passes the data as body for POST', function(assert) {
 
   ajax();
 
-  assert.strictEqual(fetch.args[0][1].body, data);
+  assert.deepEqual(fetch.args[0][1].body, data);
 });
 
 test('it doesn\'t pass the data as qs for POST', function(assert) {
@@ -222,4 +244,36 @@ test('it doesn\'t pass the data as qs for POST', function(assert) {
   ajax();
 
   assert.strictEqual(fetch.args[0][0], url);
+});
+
+test('it calls handleResponse', function(assert) {
+  return ajax().then(() => {
+    assert.deepEqual(handleResponse.args, [[
+      status,
+      {
+        'test response header': 'test response header value'
+      },
+      jsonResponse,
+      {
+        url: getQuery,
+        method: type
+      }
+    ]]);
+  });
+});
+
+test('it throws if isAdapterError is true', function(assert) {
+  handleResponseResponseCopy.isAdapterError = true;
+
+  let anotherCopy = copy(handleResponseResponseCopy, true);
+
+  return ajax().catch(result => {
+    assert.deepEqual(result, anotherCopy);
+  });
+});
+
+test('it returns json from fetch', function(assert) {
+  return ajax().then(result => {
+    assert.deepEqual(result, handleResponseResponse);
+  });
 });
