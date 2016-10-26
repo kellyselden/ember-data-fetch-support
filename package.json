@@ -43,7 +43,7 @@
     "ember-network": "0.3.0",
     "ember-resolver": "^2.0.3",
     "ember-sinon": "0.5.1",
-    "ember-try": "kellyselden/ember-try#master",
+    "ember-try": "ember-cli/ember-try#master",
     "fetch-mock": "^5.0.0",
     "loader.js": "^4.0.1",
     "mocha": "^3.0.0",
