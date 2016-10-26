@@ -15,7 +15,7 @@ describe('Acceptance | FastBoot', function() {
       fixturesPath: 'tests'
     }).then(function() {
       app.editPackageJSON(function(pkg) {
-        pkg['devDependencies']['ember-cli-fastboot'] = '1.0.0-beta.10';
+        pkg['devDependencies']['ember-cli-fastboot'] = '1.0.0-beta.12';
         pkg['devDependencies']['ember-network'] = '0.3.0';
       });
       return app.run('npm', 'install');
