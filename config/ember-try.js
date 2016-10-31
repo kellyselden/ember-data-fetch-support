@@ -48,7 +48,7 @@ module.exports = {
           'ember-data': 'emberjs/data#beta'
         },
         peerDependencies: {
-          'ember-data': undefined
+          'ember-data': null
         }
       }
     },
