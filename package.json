@@ -15,7 +15,8 @@
   "scripts": {
     "build": "ember build",
     "start": "cross-env BROWSERIFY_TESTS=true ember server",
-    "test": "cross-env BROWSERIFY_TESTS=true ember test"
+    "test": "cross-env BROWSERIFY_TESTS=true ember test",
+    "mocha": "mocha"
   },
   "dependencies": {
     "ember-cli-babel": "^5.1.7"
