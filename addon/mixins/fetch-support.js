@@ -79,8 +79,6 @@ export default Mixin.create({
 
     if (isFastBoot()) {
       headers.cookie = this._createCookieString();
-    } else {
-      init.credentials = 'include';
     }
 
     return init;
