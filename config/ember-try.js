@@ -5,7 +5,8 @@ module.exports = {
       name: 'ember-lts-2.4',
       bower: {
         dependencies: {
-          'ember': 'components/ember#lts-2-4'
+          'ember': 'components/ember#lts-2-4',
+          'ember-cli-shims': '0.1.3'
         },
         resolutions: {
           'ember': 'lts-2-4'
@@ -13,7 +14,9 @@ module.exports = {
       },
       npm: {
         devDependencies: {
-          'ember-data': '~2.4.0'
+          'ember-cli-shims': null,
+          'ember-data': '~2.4.0',
+          'ember-source': null
         }
       }
     },
@@ -29,7 +32,8 @@ module.exports = {
       },
       npm: {
         devDependencies: {
-          'ember-data': '~2.8.0'
+          'ember-data': '~2.8.0',
+          'ember-source': null
         }
       }
     },
@@ -45,7 +49,8 @@ module.exports = {
       },
       npm: {
         devDependencies: {
-          'ember-data': 'emberjs/data#release'
+          'ember-data': 'emberjs/data#release',
+          'ember-source': null
         }
       }
     },
@@ -61,7 +66,8 @@ module.exports = {
       },
       npm: {
         devDependencies: {
-          'ember-data': 'emberjs/data#beta'
+          'ember-data': 'emberjs/data#beta',
+          'ember-source': null
         },
         peerDependencies: {
           'ember-data': null
@@ -80,11 +86,18 @@ module.exports = {
       },
       npm: {
         devDependencies: {
-          'ember-data': 'emberjs/data#master'
+          'ember-data': 'emberjs/data#master',
+          'ember-source': null
         },
         peerDependencies: {
           'ember-data': null
         }
+      }
+    },
+    {
+      name: 'ember-default',
+      npm: {
+        devDependencies: {}
       }
     }
   ]
