@@ -83,7 +83,7 @@ module.exports = {
           'ember-data': 'emberjs/data#master'
         },
         peerDependencies: {
-          'ember-data': undefined
+          'ember-data': null
         }
       }
     }
