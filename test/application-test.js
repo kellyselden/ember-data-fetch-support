@@ -14,11 +14,11 @@ describe('Acceptance | FastBoot', function() {
     return app.create('dummy', {
       fixturesPath: 'tests'
     }).then(function() {
-      app.editPackageJSON(function(pkg) {
-        pkg['devDependencies']['ember-cli-fastboot'] = '1.0.0-beta.13';
-        pkg['devDependencies']['ember-network'] = process.env.npm_package_devDependencies_ember_network;
-      });
-      return app.run('npm', 'install');
+      return app.runEmberCommand(
+        'install',
+        'ember-cli-fastboot',
+        `ember-network@${process.env.npm_package_devDependencies_ember_network}`
+      );
     }).then(function() {
       return app.startServer({
         command: 'fastboot',
