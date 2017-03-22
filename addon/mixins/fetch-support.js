@@ -113,11 +113,12 @@ export default Mixin.create({
       case 'POST':
         body = options.data;
         break;
-      default:
+      default: {
         let qs = this._convertDataToQueryString(options.data);
         if (qs) {
           url += `?${qs}`;
         }
+      }
     }
 
     let init = this._createInit(type, options.headers, body);
