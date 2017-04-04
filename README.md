@@ -1,5 +1,6 @@
 # ember-data-fetch-support
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kellyselden/ember-data-fetch-support.svg)](https://greenkeeper.io/)
 [![npm version](https://badge.fury.io/js/ember-data-fetch-support.svg)](https://badge.fury.io/js/ember-data-fetch-support)
 [![Build Status](https://travis-ci.org/kellyselden/ember-data-fetch-support.svg?branch=master)](https://travis-ci.org/kellyselden/ember-data-fetch-support)
 
