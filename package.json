@@ -47,7 +47,7 @@
     "rsvp": "^3.0.0"
   },
   "peerDependencies": {
-    "ember-data": "",
+    "ember-data": "2.9.0",
     "ember-network": ""
   },
   "engines": {
