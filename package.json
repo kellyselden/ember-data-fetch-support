@@ -19,7 +19,7 @@
     "mocha": "mocha"
   },
   "dependencies": {
-    "ember-cli-babel": "^5.1.7"
+    "ember-cli-babel": "^6.0.0"
   },
   "devDependencies": {
     "chai": "^3.0.0",
