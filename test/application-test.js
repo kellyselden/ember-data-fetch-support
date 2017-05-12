@@ -22,9 +22,7 @@ describe('Acceptance | FastBoot', function() {
         `ember-network@${process.env.npm_package_devDependencies_ember_network}`
       );
     }).then(() => {
-      return app.startServer({
-        command: 'fastboot'
-      });
+      return app.startServer();
     });
   });
 
@@ -33,9 +31,11 @@ describe('Acceptance | FastBoot', function() {
   });
 
   it('can find the fetch global', function() {
-    return request('http://localhost:49741')
-      .then(response => {
-        expect(response.body).to.contain('Error: only absolute urls are supported');
-      });
+    return request({
+      url: 'http://localhost:49741',
+      headers: { 'Accept': 'text/html' }
+    }).then(response => {
+      expect(response.body).to.contain('Error: only absolute urls are supported');
+    });
   });
 });
