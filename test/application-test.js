@@ -23,8 +23,7 @@ describe('Acceptance | FastBoot', function() {
       );
     }).then(() => {
       return app.startServer({
-        command: 'fastboot',
-        additionalArguments: ['--serve-assets']
+        command: 'fastboot'
       });
     });
   });
