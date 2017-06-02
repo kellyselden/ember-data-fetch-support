@@ -18,7 +18,7 @@ describe('Acceptance | FastBoot', function() {
     }).then(() => {
       return app.runEmberCommand(
         'install',
-        'ember-cli-fastboot',
+        `ember-cli-fastboot@${process.env.npm_package_devDependencies_ember_cli_fastboot}`,
         `ember-network@${process.env.npm_package_devDependencies_ember_network}`
       );
     }).then(() => {
