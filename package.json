@@ -27,7 +27,7 @@
     "denodeify": "^1.2.1",
     "ember-browserify": "^1.0.0",
     "ember-cli": "2.13.3",
-    "ember-cli-addon-tests": "0.7.0",
+    "ember-cli-addon-tests": "0.7.1",
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-eslint": "^4.0.0",
     "ember-cli-fastboot": "1.0.0-beta.19",
