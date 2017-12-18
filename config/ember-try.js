@@ -50,9 +50,6 @@ module.exports = {
         devDependencies: {
           'ember-data': 'emberjs/data#beta',
           'ember-source': null
-        },
-        peerDependencies: {
-          'ember-data': null
         }
       }
     },
@@ -70,9 +67,6 @@ module.exports = {
         devDependencies: {
           'ember-data': 'emberjs/data#master',
           'ember-source': null
-        },
-        peerDependencies: {
-          'ember-data': null
         }
       }
     },
