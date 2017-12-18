@@ -14,8 +14,10 @@
   "repository": "https://github.com/kellyselden/ember-data-fetch-support",
   "scripts": {
     "build": "ember build",
-    "start": "cross-env BROWSERIFY_TESTS=true ember server",
-    "test": "cross-env BROWSERIFY_TESTS=true ember test",
+    "prestart": "cross-env BROWSERIFY_TESTS=true",
+    "pretest": "cross-env BROWSERIFY_TESTS=true",
+    "start": "ember server",
+    "test": "ember test",
     "mocha": "cross-env DEBUG=ember-cli-addon-tests mocha"
   },
   "dependencies": {
