@@ -31,7 +31,7 @@ module.exports = {
       },
       npm: {
         devDependencies: {
-          'ember-data': 'latest',
+          'ember-data': '',
           'ember-source': null
         }
       }
