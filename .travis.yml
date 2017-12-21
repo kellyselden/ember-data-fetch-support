@@ -20,6 +20,7 @@ cache:
 env:
   global:
     - BROWSERIFY_TESTS=true
+    - DEBUG=ember-try*
   matrix:
     # we recommend testing LTS's and latest stable release (bonus points to beta/canary)
     - EMBER_TRY_SCENARIO=ember-lts-2.4
@@ -42,6 +43,8 @@ before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - npm config set spin false
+  - npm install -g npm@5
+  - npm --version
 
 install:
   - npm install
